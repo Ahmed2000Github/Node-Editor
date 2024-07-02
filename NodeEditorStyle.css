@@ -1,0 +1,215 @@
+:root {
+  --node-text-color: white;
+  --node-border-radius: 5px;
+  --node-padding: 10px;
+  --node-width: 200px;
+  --node-link-point-length: 10px;
+  --add-node-button-length: 40px;
+  --node-color: #343434;
+  --node-list-color: #000000;
+  --node-list-position: calc(var(--add-node-button-length));
+  --node-io-background-color: #1b1b1b;
+  --node-io-background-color-light: #2c2c2c;
+}
+
+body {
+  background: url("./grid.svg") repeat;
+  background-size: 20px 20px;
+  user-select: none;
+  cursor: pointer;
+  height: 100vh;
+}
+svg path {
+  stroke-linejoin: round;
+}
+
+div li {
+  font-size: small;
+}
+body svg {
+  position: absolute;
+}
+.closed {
+  transform: translateX(210px);
+}
+.add-node {
+  transition: 1.5s;
+  background-color: rgb(16, 181, 218);
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: var(--add-node-button-length);
+  height: var(--add-node-button-length);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0px 0px 10px white;
+  z-index: 10;
+}
+
+.node-list {
+  z-index: 10;
+  transition: 1.5s;
+  position: fixed;
+  background-color: var(--node-list-color);
+  bottom: var(--node-list-position);
+  right: var(--node-list-position);
+  color: white;
+  padding: 10px;
+  width: 150px;
+  border-radius: var(--node-border-radius);
+}
+.node-list .node-item {
+  list-style: none;
+  padding: 5px;
+  border-radius: var(--node-border-radius);
+}
+.node-list .node-item:hover {
+  background-color: var(--node-io-background-color-light);
+}
+
+.node {
+  position: absolute;
+  color: var(--node-text-color);
+  background-color: var(--node-color);
+  width: var(--node-width);
+  border-radius: var(--node-border-radius);
+  box-shadow: 0px 0px 5px black;
+}
+.title {
+  background-color: black;
+  padding: var(--node-padding);
+  border-top-left-radius: var(--node-border-radius);
+  border-top-right-radius: var(--node-border-radius);
+}
+
+.content {
+  padding: var(--node-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content .output {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+.content .output span {
+  user-select: text;
+  background-color: var(--node-io-background-color);
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: var(--node-border-radius);
+  letter-spacing: 2px;
+}
+.content .output .color {
+  background-color: transparent;
+  height: 18px;
+  width: 70px;
+  border-radius: var(--node-border-radius);
+}
+
+.content .input {
+  position: relative;
+  text-align: center;
+  background-color: var(--node-io-background-color);
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: var(--node-border-radius);
+  display: flex;
+  justify-content: space-between;
+}
+.content .input ul {
+  position: absolute;
+  transform-origin: top;
+  background-color: var(--node-io-background-color);
+  width: calc(var(--node-width) - 2 * var(--node-padding));
+  left: 0;
+  top: calc(2 * 5px);
+  padding: 0px;
+  padding-top: 5px;
+  border-radius: var(--node-border-radius);
+  z-index: 9;
+  transition: 0.2s;
+}
+.content .input ul li {
+  list-style: none;
+  padding: 5px;
+}
+.content .input ul li:hover {
+  background-color: var(--node-io-background-color-light);
+}
+.content .input .arrow-down img {
+  width: 20px;
+  height: 10px;
+}
+.combo-box-closed {
+  transform: scaleY(0);
+}
+
+.content .link-node {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.content .link-node-left {
+  justify-content: start;
+  padding-left: 20px;
+}
+.content .link-node-right {
+  justify-content: end;
+  padding-right: 20px;
+}
+.content .link-node .link-point {
+  position: absolute;
+  border-radius: 50%;
+  background-color: gray;
+  height: var(--node-link-point-length);
+  width: var(--node-link-point-length);
+  z-index: 9;
+}
+.content .link-node-left .link-point {
+  transform: translateY(50%);
+  left: calc(0px - (3 / 2) * var(--node-padding));
+}
+.content .link-node-right .link-point {
+  transform: translateY(50%);
+  right: calc(0px - (3 / 2) * var(--node-padding));
+}
+
+.content .attribute {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.content .attribute .colorPicker {
+  -webkit-appearance: none;
+  outline: none;
+  padding: 0px;
+  margin: 0px;
+  border-radius: var(--node-border-radius);
+  background-color: transparent;
+  border-color: transparent;
+  width: 70px;
+  height: 20px;
+}
+.content .attribute .colorPicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: var(--node-border-radius);
+}
+
+.close-button {
+  transform: rotateZ(135deg);
+  background-color: red;
+}

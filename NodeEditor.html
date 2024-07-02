@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node Editor</title>
+    <link rel="stylesheet" href="./NodeEditorStyle.css" />
+  </head>
+  <body>
+    <div class="add-node animate-add-button">+</div>
+    <ul class="node-list close">
+      <li class="node-item" value="Color">Color</li>
+      <li class="node-item" value="MixColor">Mix Color</li>
+      <li class="node-item" value="Output">Output</li>
+    </ul>
+    <!-- <div class="node" style="left: 100px" node-type="mix-color">
+      <div class="title">Mix Color</div>
+      <div class="content">
+        <div class="link-node link-node-right">
+          <span>Output</span>
+          <div class="link-point" connection-id="" type="" io-type="out" value=""></div>
+        </div>
+        <div class="input">
+          <span>Average</span>
+          <div class="arrow-down">
+            <img src="./arrow-down.svg" alt="" srcset="" />
+          </div>
+          <ul class="combo-box-closed">
+            <li>Average</li>
+            <li>HSL</li>
+            <li>Weighted</li>
+          </ul>
+        </div>
+        <div class="link-node link-node-left">
+          <span>Color 1</span>
+          <div class="link-point left-side" connection-id="" type="" io-type="in" value=""></div>
+        </div>
+         <div class="link-node link-node-left">
+          <span>Color 2</span>
+          <div class="link-point left-side" connection-id="" type=""  io-type="in" value=""></div>
+        </div>
+      </div>
+    </div>
+    <div class="node" style="top: 200px" node-type="color" >
+      <div class="title">Color</div>
+      <div class="content">
+        <div class="link-node link-node-right">
+          <span>Value</span>
+          <div class="link-point" connection-id="" type=""  io-type="out" value="#ff0000"></div>
+        </div>
+        <div class="attribute">
+          <span>Value</span>
+          <input
+            type="color"
+            class="colorPicker"
+            name="colorPicker"
+            value="#ff0000"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="node" style="left: 400px" node-type="output">
+      <div class="title">Output</div>
+      <div class="content">
+        <div class="link-node link-node-left">
+          <span>Color</span>
+          <div class="link-point left-side" connection-id="" type=""  io-type="in" value=""></div>
+        </div>
+         <div class="output">
+          <span>#ff0000</span>
+          <div class="color"> </div>
+        </div>
+      </div>
+    </div> -->
+
+    <script src="./NodeEditorScript.js"></script>
+  </body>
+</html>
