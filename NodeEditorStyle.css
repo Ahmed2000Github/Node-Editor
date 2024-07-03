@@ -14,11 +14,20 @@
 
 body {
   background: url("./grid.svg") repeat;
+  background-color: #232323;
   background-size: 20px 20px;
   user-select: none;
   cursor: pointer;
   height: 100vh;
 }
+  .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 svg path {
   stroke-linejoin: round;
 }

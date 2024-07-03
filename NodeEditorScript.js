@@ -121,8 +121,8 @@ function setupAddButton() {
     nodeItem.addEventListener("click", () => {
       var type = nodeItem.getAttribute("value");
       addNodeToBody(type);
-      nodeList.classList.add("closed");
-      addButton.classList.remove("close-button");
+      // nodeList.classList.add("closed");
+      // addButton.classList.remove("close-button");
     });
   });
 
@@ -139,17 +139,14 @@ function setupAddButton() {
     document.body.appendChild(nodeDiv);
     switch (type) {
       case "MixColor":
-          setupInput();;
+        setupInput();
         break;
       case "Output":
-        setupOutputs();
+        setupOutput(nodeDiv);
         break;
       default:
         break;
     }
-
-    // setupNodes();
-    // setupLinkPoints();
   }
 }
 function setupBounds() {
@@ -158,18 +155,19 @@ function setupBounds() {
     maxYconstraints = window.innerHeight;
   });
 }
-function setupOutputs() {
-  let output = document.querySelector(`[node-type="output"]`);
+function setupOutput(output) {
   let outNode = output.querySelector(".link-point");
   let callback = () => {
     let value = outNode.getAttribute("value");
+    let span = output.querySelector(".output span");
+    let color = output.querySelector(".output .color");
     if (value && value.includes("#")) {
-      let span = output.querySelector(".output span");
-      let color = output.querySelector(".output .color");
       span.textContent = value;
       color.style.backgroundColor = value;
+    } else {
+      span.textContent = "#------";
+      color.style.backgroundColor = "transparent";
     }
-    console.log("change");
   };
   addObserveToOutNode(null, outNode, callback);
 }
@@ -452,9 +450,12 @@ function removeConnection(id) {
   }
 }
 
-function cleanNode(node) {
-  var targetId = node.getAttribute("connection-id");
-  let ioAttribute = node.getAttribute("io-type") == "out"?"in":"out"
+function cleanNode(inNode) {
+  var targetId = inNode.getAttribute("connection-id");
+  inNode.setAttribute("value", "");
+   let transformNode = inNode.parentNode.parentNode.parentNode;
+   transform(transformNode);
+  let ioAttribute = inNode.getAttribute("io-type") == "out" ? "in" : "out";
   if (targetId != "") {
     var observer = observers[targetId];
     if (observer) {
@@ -469,13 +470,10 @@ function cleanNode(node) {
     console.log(outputNode);
     let connectionId = outputNode.getAttribute("connection-id");
     let newConnectionId = connectionId.replace(targetId, "").trim();
-    outputNode.setAttribute(
-      "connection-id",
-      newConnectionId
-    );
-     if (newConnectionId == "") {
-         outputNode.style.backgroundColor = "gray";
-     }
+    outputNode.setAttribute("connection-id", newConnectionId);
+    if (newConnectionId == "") {
+      outputNode.style.backgroundColor = "gray";
+    }
     removeConnection(targetId);
   }
 }
@@ -535,6 +533,8 @@ function transform(transformNode) {
           outputValue = MixingColorUtils.mixColorsAverage(color1, color2);
       }
       ioPoints[0].setAttribute("value", outputValue);
+    } else {
+      ioPoints[0].setAttribute("value", "");
     }
   }
 }
